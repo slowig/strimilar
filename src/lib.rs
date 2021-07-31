@@ -1,10 +1,11 @@
-//Returns a distance calculated by Levenshtein method
-//
-//```
-//let distance = levenshtein("hello", "world");
-//
-//assert_eq!(distance, 5);
-//```
+//!Returns a distance calculated by Levenshtein method
+//!
+//!```
+//!use strimilar::levenshtein;
+//!let distance = levenshtein("hello", "world");
+//!
+//!assert_eq!(distance, 4);
+//!```
 pub fn levenshtein(left_string: &str, right_string: &str) -> i32 {
     let mut matrix = vec![vec![0; right_string.len()+1]; left_string.len()+1];
 
