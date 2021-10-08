@@ -1,11 +1,11 @@
-//!Returns a distance calculated by Levenshtein method
-//!
-//!```
-//!use strimilar::levenshtein;
-//!let distance = levenshtein("hello", "world");
-//!
-//!assert_eq!(distance, 4);
-//!```
+///Returns a distance calculated by Levenshtein method
+///
+///```
+///use strimilar::levenshtein;
+///let distance = levenshtein("hello", "world");
+///
+///assert_eq!(distance, 4);
+///```
 pub fn levenshtein(left_string: &str, right_string: &str) -> i32 {
     let mut matrix = vec![vec![0; right_string.len()+1]; left_string.len()+1];
 
@@ -32,4 +32,26 @@ pub fn levenshtein(left_string: &str, right_string: &str) -> i32 {
     }
 
     return matrix[left_string.len()][right_string.len()];
+}
+
+/// Returns a distance calculated by Hamming method.
+/// Humming method requires equal length of both strings.
+///
+///```
+///use strimilar::hamming;
+///let distance = hamming("hello", "world");
+///
+///assert_eq!(distance.unwrap(), 4);
+///```
+pub fn hamming(left_string: &str, right_string: &str) -> Result<i32, String> {
+    let mut distance = 0;
+    if left_string.len() != right_string.len() {
+        return Err(String::from("Length of both strings is not equal"))
+    }
+    for (index, left_char) in left_string.chars().enumerate() {
+        if right_string.chars().nth(index).unwrap() != left_char {
+            distance += 1;
+        }
+    }
+    Ok(distance)
 }
